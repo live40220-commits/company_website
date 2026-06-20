@@ -3,8 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { Mail, Phone, MapPin, Send, CheckCircle, ArrowUpRight } from "lucide-react";
-import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
+import { Mail, Phone, MapPin, Send, CheckCircle, X, Globe, GitBranch, ArrowUpRight } from "lucide-react";
 import Logo from "@/components/shared/Logo";
 
 export default function Footer() {
@@ -67,7 +66,7 @@ export default function Footer() {
                 rel="noreferrer"
                 className="w-10 h-10 flex items-center justify-center rounded-full glass-panel border border-slate-300 dark:border-slate-800 hover:text-brand-green hover:scale-105 active:scale-95 transition-all cursor-none"
               >
-                <FaLinkedin className="w-4 h-4" />
+                <Globe className="w-4 h-4" />
               </a>
               <a
                 href="https://twitter.com"
@@ -75,7 +74,7 @@ export default function Footer() {
                 rel="noreferrer"
                 className="w-10 h-10 flex items-center justify-center rounded-full glass-panel border border-slate-300 dark:border-slate-800 hover:text-brand-blue hover:scale-105 active:scale-95 transition-all cursor-none"
               >
-                <FaTwitter className="w-4 h-4" />
+                <X className="w-4 h-4" />
               </a>
               <a
                 href="https://github.com"
@@ -83,7 +82,7 @@ export default function Footer() {
                 rel="noreferrer"
                 className="w-10 h-10 flex items-center justify-center rounded-full glass-panel border border-slate-300 dark:border-slate-800 hover:text-white hover:scale-105 active:scale-95 transition-all cursor-none"
               >
-                <FaGithub className="w-4 h-4" />
+                <GitBranch className="w-4 h-4" />
               </a>
             </div>
           </div>

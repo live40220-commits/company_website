@@ -2,8 +2,7 @@
 
 import React from "react";
 import { motion as m } from "framer-motion";
-import { Sparkles, Target, Compass, Award, Shield, Users } from "lucide-react";
-import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { Sparkles, Target, Compass, Award, Shield, Users, GitBranch, Globe } from "lucide-react";
 
 const values = [
   { icon: Target, title: "Innovation First", desc: "We continually test new frontiers in Agentic AI and edge computing to ensure client codebases remain competitive." },
@@ -274,10 +273,10 @@ export default function AboutPage() {
               {/* Social icons */}
               <div className="flex items-center gap-2.5 mt-6 pt-4 border-t border-slate-200/50 dark:border-slate-850/50 text-slate-500">
                 <a href={t.linkedin} className="hover:text-brand-green transition-colors cursor-none" aria-label="LinkedIn Profile">
-                  <FaLinkedin className="w-4 h-4" />
+                  <Globe className="w-4 h-4" />
                 </a>
                 <a href={t.github} className="hover:text-brand-blue transition-colors cursor-none" aria-label="GitHub Profile">
-                  <FaGithub className="w-4 h-4" />
+                  <GitBranch className="w-4 h-4" />
                 </a>
               </div>
             </m.div>
