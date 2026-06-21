@@ -1,8 +1,15 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Mail, Phone, MapPin, Clock, Send, Check, Sparkles, AlertCircle } from "lucide-react";
+import emailjs from "@emailjs/browser";
+import { getVisitorMetadata } from "@/utils/visitorTracker";
+
+// EmailJS Credentials Configuration - Replace these with your actual keys if different
+const EMAILJS_SERVICE_ID = "service_lw030qp";
+const EMAILJS_TEMPLATE_ID = "template_h532b2t"; // Replace with your actual template ID
+const EMAILJS_PUBLIC_KEY = "xI_k-O_J-3tY4nS7v"; // Replace with your actual EmailJS Public Key
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({ name: "", email: "", subject: "", message: "" });
@@ -10,7 +17,7 @@ export default function ContactPage() {
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.message) {
       setErrorMsg("Please fill out all required fields.");
@@ -20,12 +27,49 @@ export default function ContactPage() {
     setIsSubmitting(true);
     setErrorMsg("");
 
-    // Simulate server POST submission
-    setTimeout(() => {
+    try {
+      // 1. Gather Visitor Tracking Metadata
+      const trackingMeta = await getVisitorMetadata();
+
+      // 2. Define Context Subject dynamically based on user's inputs
+      let formContext = "General Website Lead";
+      const sub = (formData.subject || "").toLowerCase();
+      const msg = (formData.message || "").toLowerCase();
+
+      if (sub.includes("ai") || sub.includes("agent") || sub.includes("bot") || msg.includes("ai") || msg.includes("agent") || msg.includes("bot")) {
+        formContext = "AI & ML Development Request";
+      } else if (sub.includes("web") || sub.includes("saas") || sub.includes("site") || msg.includes("web") || msg.includes("saas") || msg.includes("site")) {
+        formContext = "Web & SaaS Development Request";
+      } else if (sub.includes("mobile") || sub.includes("app") || msg.includes("mobile") || msg.includes("app")) {
+        formContext = "Mobile App Development Request";
+      }
+
+      // 3. Prepare parameters for EmailJS Template variables
+      const templateParams = {
+        from_name: formData.name,
+        from_email: formData.email,
+        subject: formData.subject || "No Specific Subject Given",
+        form_context: formContext,
+        message: formData.message,
+        ...trackingMeta
+      };
+
+      // 4. Send Email via EmailJS
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        templateParams,
+        EMAILJS_PUBLIC_KEY
+      );
+
       setIsSubmitting(false);
       setSubmitSuccess(true);
       setFormData({ name: "", email: "", subject: "", message: "" });
-    }, 1500);
+    } catch (error: any) {
+      console.error("EmailJS Error:", error);
+      setIsSubmitting(false);
+      setErrorMsg(error?.text || "Failed to dispatch email. Please try again or email us directly.");
+    }
   };
 
   const openCalendly = () => {

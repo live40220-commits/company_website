@@ -5,13 +5,19 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Mail, Phone, MapPin, Send, CheckCircle, X, Globe, GitBranch, ArrowUpRight } from "lucide-react";
 import Logo from "@/components/shared/Logo";
+import emailjs from "@emailjs/browser";
+import { getVisitorMetadata } from "@/utils/visitorTracker";
+
+const EMAILJS_SERVICE_ID = "service_lw030qp";
+const EMAILJS_TEMPLATE_ID = "template_h532b2t"; // Replace with your actual template ID
+const EMAILJS_PUBLIC_KEY = "xI_k-O_J-3tY4nS7v"; // Replace with your actual EmailJS Public Key
 
 export default function Footer() {
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
   const [error, setError] = useState("");
 
-  const handleSubscribe = (e: React.FormEvent) => {
+  const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email) {
       setError("Please enter your email.");
@@ -22,10 +28,25 @@ export default function Footer() {
       return;
     }
 
-    // Mock subscription
-    setSubscribed(true);
-    setEmail("");
-    setError("");
+    try {
+      const trackingMeta = await getVisitorMetadata();
+      const templateParams = {
+        from_name: "Newsletter Subscriber",
+        from_email: email,
+        subject: "Newsletter Subscription",
+        form_context: "Newsletter Signup",
+        message: `New newsletter subscription from: ${email}`,
+        ...trackingMeta
+      };
+
+      await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams, EMAILJS_PUBLIC_KEY);
+      setSubscribed(true);
+      setEmail("");
+      setError("");
+    } catch (err: any) {
+      console.error("Newsletter EmailJS Error:", err);
+      setError("Failed to subscribe. Please try again.");
+    }
   };
 
   const openCalendly = () => {
