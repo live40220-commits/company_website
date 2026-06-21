@@ -8,11 +8,11 @@ import { getVisitorMetadata } from "@/utils/visitorTracker";
 
 // EmailJS Credentials Configuration - Replace these with your actual keys if different
 const EMAILJS_SERVICE_ID = "service_lw030qp";
-const EMAILJS_TEMPLATE_ID = "template_h532b2t"; // Replace with your actual template ID
-const EMAILJS_PUBLIC_KEY = "xI_k-O_J-3tY4nS7v"; // Replace with your actual EmailJS Public Key
+const EMAILJS_TEMPLATE_ID = "template_t2r1s1j";
+const EMAILJS_PUBLIC_KEY = "znlhzaw2OQmZ7uVqd";
 
 export default function ContactPage() {
-  const [formData, setFormData] = useState({ name: "", email: "", subject: "", message: "" });
+  const [formData, setFormData] = useState({ name: "", email: "", phone: "", subject: "", message: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
@@ -46,11 +46,12 @@ export default function ContactPage() {
 
       // 3. Prepare parameters for EmailJS Template variables
       const templateParams = {
+        subject: formContext,
         from_name: formData.name,
         from_email: formData.email,
-        subject: formData.subject || "No Specific Subject Given",
-        form_context: formContext,
-        message: formData.message,
+        phone: formData.phone || "Not provided",
+        message: formData.subject ? `Subject: ${formData.subject}\n\n${formData.message}` : formData.message,
+        source: "Contact Page Form",
         ...trackingMeta
       };
 
@@ -64,7 +65,7 @@ export default function ContactPage() {
 
       setIsSubmitting(false);
       setSubmitSuccess(true);
-      setFormData({ name: "", email: "", subject: "", message: "" });
+      setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
     } catch (error: any) {
       console.error("EmailJS Error:", error);
       setIsSubmitting(false);
@@ -146,18 +147,34 @@ export default function ContactPage() {
                   </div>
                 </div>
 
-                <div>
-                  <label className="block text-[10px] font-semibold text-slate-500 uppercase mb-1.5">
-                    Subject (Optional)
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="e.g. AI Agent Scope"
-                    value={formData.subject}
-                    onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                    className="w-full px-4 py-2.5 text-xs rounded-xl bg-slate-200/50 dark:bg-slate-900 border border-slate-350/40 dark:border-slate-800 focus:outline-none focus:border-brand-green text-slate-850 dark:text-slate-100 cursor-none"
-                  />
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-[10px] font-semibold text-slate-500 uppercase mb-1.5">
+                      Phone Number (Optional)
+                    </label>
+                    <input
+                      type="tel"
+                      placeholder="e.g. +1 234 567 890"
+                      value={formData.phone}
+                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                      className="w-full px-4 py-2.5 text-xs rounded-xl bg-slate-200/50 dark:bg-slate-900 border border-slate-350/40 dark:border-slate-800 focus:outline-none focus:border-brand-green text-slate-850 dark:text-slate-100 cursor-none"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[10px] font-semibold text-slate-500 uppercase mb-1.5">
+                      Subject (Optional)
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="e.g. AI Agent Scope"
+                      value={formData.subject}
+                      onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+                      className="w-full px-4 py-2.5 text-xs rounded-xl bg-slate-200/50 dark:bg-slate-900 border border-slate-350/40 dark:border-slate-800 focus:outline-none focus:border-brand-green text-slate-850 dark:text-slate-100 cursor-none"
+                    />
+                  </div>
                 </div>
+
+
 
                 <div>
                   <label className="block text-[10px] font-semibold text-slate-500 uppercase mb-1.5">

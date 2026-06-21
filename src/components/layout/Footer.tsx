@@ -9,8 +9,8 @@ import emailjs from "@emailjs/browser";
 import { getVisitorMetadata } from "@/utils/visitorTracker";
 
 const EMAILJS_SERVICE_ID = "service_lw030qp";
-const EMAILJS_TEMPLATE_ID = "template_h532b2t"; // Replace with your actual template ID
-const EMAILJS_PUBLIC_KEY = "xI_k-O_J-3tY4nS7v"; // Replace with your actual EmailJS Public Key
+const EMAILJS_TEMPLATE_ID = "template_t2r1s1j";
+const EMAILJS_PUBLIC_KEY = "znlhzaw2OQmZ7uVqd";
 
 export default function Footer() {
   const [email, setEmail] = useState("");
@@ -31,11 +31,12 @@ export default function Footer() {
     try {
       const trackingMeta = await getVisitorMetadata();
       const templateParams = {
+        subject: "Newsletter Subscription",
         from_name: "Newsletter Subscriber",
         from_email: email,
-        subject: "Newsletter Subscription",
-        form_context: "Newsletter Signup",
+        phone: "N/A",
         message: `New newsletter subscription from: ${email}`,
+        source: "Footer Newsletter Form",
         ...trackingMeta
       };
 
