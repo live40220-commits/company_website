@@ -191,8 +191,8 @@ export default function ContactPage() {
                 <Mail className="w-4.5 h-4.5 text-brand-green mt-0.5 flex-shrink-0" />
                 <div>
                   <span className="text-slate-400 block font-normal">Sales & Support</span>
-                  <a href="mailto:info@100solutionz.com" className="hover:text-brand-green transition-colors cursor-none font-bold">
-                    info@100solutionz.com
+                  <a href="mailto:live40220@gmail.com" className="hover:text-brand-green transition-colors cursor-none font-bold">
+                    live40220@gmail.com
                   </a>
                 </div>
               </div>

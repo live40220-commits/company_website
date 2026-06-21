@@ -49,7 +49,7 @@ export default function ChatWidget() {
     
     // Simulate thinking delay
     setTimeout(() => {
-      let replyText = "I'm not sure I fully understand, but I can tell you that 100Solutionz specializes in AI Agents, RAG Applications, Web SaaS, Mobile apps, and Cloud DevOps. Feel free to contact our support at info@100solutionz.com!";
+      let replyText = "I'm not sure I fully understand, but I can tell you that 100Solutionz specializes in AI Agents, RAG Applications, Web SaaS, Mobile apps, and Cloud DevOps. Feel free to contact our support at live40220@gmail.com!";
       const q = query.toLowerCase();
 
       if (q.includes("ai") || q.includes("chatbot") || q.includes("rag") || q.includes("agent")) {
@@ -59,7 +59,7 @@ export default function ChatWidget() {
       } else if (q.includes("portfolio") || q.includes("project") || q.includes("work")) {
         replyText = "Our portfolio highlights AI Chatbots, Medical AI platforms, custom E-commerce, and SaaS dashboards. Check out our 'Portfolio' page to see detailed case studies and tech stacks used!";
       } else if (q.includes("human") || q.includes("speak") || q.includes("support") || q.includes("contact")) {
-        replyText = "I have flagged our sales team! You can reach a human technical advisor instantly via phone at +1 (555) 019-9100 or email us directly at info@100solutionz.com.";
+        replyText = "I have flagged our sales team! You can reach a human technical advisor instantly via phone at +1 (555) 019-9100 or email us directly at live40220@gmail.com.";
       } else if (q.includes("career") || q.includes("job") || q.includes("hiring")) {
         replyText = "We are always looking for talented AI Engineers, React Developers, and Cloud Specialists! Head over to our 'Careers' page to see active positions and submit an application.";
       } else if (q.includes("hello") || q.includes("hi") || q.includes("hey")) {

@@ -197,8 +197,8 @@ export default function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 pt-12 mt-12 border-t border-slate-200 dark:border-slate-800 text-xs text-slate-500 dark:text-slate-400">
           <div className="flex items-center gap-2">
             <Mail className="w-4 h-4 text-brand-green" />
-            <a href="mailto:info@100solutionz.com" className="hover:text-brand-green transition-colors cursor-none">
-              info@100solutionz.com
+            <a href="mailto:live40220@gmail.com" className="hover:text-brand-green transition-colors cursor-none">
+              live40220@gmail.com
             </a>
           </div>
           <div className="flex items-center gap-2">

@@ -12,7 +12,7 @@ export default function JsonLd() {
       "@type": "ContactPoint",
       "telephone": "+1-555-019-9100",
       "contactType": "customer support",
-      "email": "info@100solutionz.com",
+      "email": "live40220@gmail.com",
       "areaServed": ["US", "PK", "GB"],
       "availableLanguage": "en"
     },

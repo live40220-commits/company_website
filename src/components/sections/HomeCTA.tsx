@@ -48,10 +48,10 @@ export default function HomeCTA() {
               <ArrowRight className="w-4 h-4" />
             </button>
             <a
-              href="mailto:info@100solutionz.com"
+              href="mailto:live40220@gmail.com"
               className="w-full sm:w-auto px-8 py-4 rounded-full glass-panel border border-slate-300 dark:border-slate-800 text-slate-800 dark:text-slate-200 text-sm font-bold hover:bg-slate-100 dark:hover:bg-slate-900/50 transition-all hover:scale-103 active:scale-98 cursor-none flex items-center justify-center gap-1.5"
             >
-              info@100solutionz.com
+              live40220@gmail.com
             </a>
           </div>
 
